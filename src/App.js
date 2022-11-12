@@ -1,27 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import GameControls from './components/GameControls'
 
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = { 
+      level: 1,
+      lowestPitch: 100, 
+      highestPitch: 15000,
+      toneDuration: 2,
+      gamesPlayed: 0,
+      wins: 0,
+      losses: 0
+    }
+
+    this.handleChangeLevel = this.handleChangeLevel.bind(this);
+  }
+
+  handleChangeLevel(e){
+    console.log("i ran")
+    e.preventDefault();
+    this.setState({ level: e.target.value})
+  }
+  
+  render(){
+    return (
+      <div className="App">
+        <GameControls handleChangeLevel={this.handleChangeLevel} level={this.state.level}/>
+        <h1>Howdy!</h1>
+        <p>Welcome to level {this.state.level}. It's the worst</p> 
+      </div>
+    );}
 }
 
 export default App;
